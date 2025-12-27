@@ -229,3 +229,8 @@ kubectl describe pod <POD> -n <NAMESPACE>
 kubectl logs <POD> -n <NAMESPACE> --previous
 kubectl get events -n <NAMESPACE> --sort-by=.lastTimestamp
 ```
+
+
+# serviceAccount
+
+jq -R 'split(".") | select(length > 0) | .[0],.[1] | @base64d | fromjson' <<< eywrgfuwihufiweuhvcuenvui......
