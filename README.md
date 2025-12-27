@@ -234,3 +234,11 @@ kubectl get events -n <NAMESPACE> --sort-by=.lastTimestamp
 # serviceAccount
 
 jq -R 'split(".") | select(length > 0) | .[0],.[1] | @base64d | fromjson' <<< eywrgfuwihufiweuhvcuenvui......
+
+# secret
+
+kubectl create secret docker-registry regcred \
+  --docker-server=REGISTRY_URL \
+  --docker-username=USERNAME \
+  --docker-password=PASSWORD \
+  --docker-email=EMAIL
