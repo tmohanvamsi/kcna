@@ -263,6 +263,24 @@ kubectl create secret docker-registry regcred \
 - GitOps tools (e.g., Argo CD, Flux) sync clusters from Git and reconcile drift automatically.
 - Typical flow: GitHub/GitLab host repos; GitOps tools deploy to Kubernetes from those repos.
 
+## Helm chart: kube-prometheus-stack
+
+```sh
+# Add repo
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+# Install (example namespace)
+kubectl create namespace monitoring
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring
+
+# Upgrade
+helm upgrade kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring
+
+# Uninstall
+helm uninstall kube-prometheus-stack -n monitoring
+```
+
 
 # Istio
 
