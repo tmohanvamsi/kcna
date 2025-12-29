@@ -255,6 +255,14 @@ kubectl create secret docker-registry regcred \
   --docker-password=PASSWORD \
   --docker-email=EMAIL
 
+## GitHub vs GitLab vs GitOps (quick compare)
+
+- GitHub: code hosting + GitHub Actions for CI/CD; massive OSS ecosystem; strong marketplace.
+- GitLab: code hosting + built-in CI/CD and DevSecOps features; single product for repo, CI, registry.
+- GitOps: an operating model for deployments, not a hosting platform; desired state stored in Git.
+- GitOps tools (e.g., Argo CD, Flux) sync clusters from Git and reconcile drift automatically.
+- Typical flow: GitHub/GitLab host repos; GitOps tools deploy to Kubernetes from those repos.
+
 
 # Istio
 
