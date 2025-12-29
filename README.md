@@ -230,6 +230,18 @@ kubectl logs <POD> -n <NAMESPACE> --previous
 kubectl get events -n <NAMESPACE> --sort-by=.lastTimestamp
 ```
 
+## CNI notes (general + Weave)
+
+- CNI = Container Network Interface; kubelet calls CNI plugins to attach pod networking.
+- CNI config files live in `/etc/cni/net.d/`, binaries in `/opt/cni/bin/`.
+- CNI decides pod IP assignment and routing so pods can talk across nodes.
+- Weave Net is a CNI plugin that builds an overlay network (VXLAN) and includes IPAM.
+- Weave runs as a DaemonSet in `kube-system` (`weave-net`), one pod per node.
+- Weave supports NetworkPolicy; ensure policies are enabled in the cluster.
+- Quick checks:
+  - `kubectl get pods -n kube-system -l name=weave-net`
+  - `kubectl logs -n kube-system -l name=weave-net --tail=200`
+
 
 # serviceAccount
 
@@ -242,3 +254,24 @@ kubectl create secret docker-registry regcred \
   --docker-username=USERNAME \
   --docker-password=PASSWORD \
   --docker-email=EMAIL
+
+
+# Istio
+
+curl -L https://istio.io/downloadIstio | sh -
+cd istio-*
+export PATH="$PWD/bin:$PATH"
+istioctl version
+
+export PATH="$HOME/istio-*/bin:$PATH"
+
+istioctl install --set profile=demo -y
+
+istioctl verify-install
+
+
+istioctl version
+istioctl analyze -A
+
+
+kubectl label ns demo istio-injection=enabled

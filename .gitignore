@@ -1,0 +1,3 @@
+# Istio download bundles and extracted binaries
+istio-*/
+istioctl
